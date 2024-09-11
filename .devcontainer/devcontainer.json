@@ -1,0 +1,59 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/docker-existing-dockerfile
+{
+	"name": "Ubuntu 24.04 for STM32",
+	"build": {
+		// Sets the run context to one level up instead of the .devcontainer folder.
+		"context": "..",
+		// Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
+		"dockerfile": "Dockerfile"
+	},
+
+	"workspaceFolder": "/home/devcontainer/workspace",
+	"mounts": [
+		"source=${localWorkspaceFolder},target=/home/devcontainer/workspace,type=bind,consistency=cached"
+	],
+
+	// Features to add sto the dev container. More info: https://containers.dev/features.
+	// "features": {},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": "cat /etc/os-release",
+
+	// Configure tool-specific properties.
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"terminal.integrated.profiles.linux": {
+					"bash": {
+						"path": "bash",
+						"icon": "terminal-bash"
+					},
+					"zsh": {
+						"path": "zsh"
+					}
+				}
+			}
+		}
+	},
+
+	// Uncomment to connect as an existing user other than the container default. More info: https://aka.ms/dev-containers-non-root.
+	"remoteUser": "devcontainer",
+
+	// 添加以下行来启用特权模式
+	"runArgs": [
+		"--privileged"
+		// "--device=/dev/ttyACM0", 
+		// "--device=/dev/usb/hiddev3"
+	],
+
+	// 移除 deviceCaptureRules
+	// 修改 runArgs 以包含设备映射
+
+
+	// 添加以下行来在容器启动时执行命令
+	// "postStartCommand": "sudo chmod a+rw /dev/usb/hiddev*"
+}

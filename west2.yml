@@ -1,0 +1,99 @@
+# The west manifest file for upstream Zephyr.
+#
+# The per-installation west configuration file, .west/config, sets the
+# path to the project containing this file in the [manifest] section's
+# "path" variable.
+#
+# You are free to create your own manifest files and put them in any
+# repository you want, to create your own custom Zephyr installations.
+# For example, you could create a manifest file in your own out of
+# tree application directory, which would pull this zephyr repository
+# in as an ordinary project.
+#
+# You can pass your manifest repositories to west init when creating a
+# new Zephyr installation. See the west documentation for more
+# information.
+
+manifest:
+  defaults:
+    remote: upstream
+
+  remotes:
+    - name: upstream
+      url-base: https://github.com/zephyrproject-rtos
+
+  group-filter: [-optional]
+
+  #
+  # Please add items below based on alphabetical order
+  projects:
+    - name: liblc3
+      revision: 1a5938ebaca4f13fe79ce074f5dee079783aa29f
+      path: modules/lib/liblc3
+    - name: littlefs
+      path: modules/fs/littlefs
+      groups:
+        - fs
+      revision: 009bcff0ed4853a53df8256039fa815bda6854dd
+    - name: mbedtls
+      revision: fb36f3fe20f9f62e67b1a20c0cfe0a6788ec2bf6
+      path: modules/crypto/mbedtls
+      groups:
+        - crypto
+    - name: mcuboot
+      revision: 52e2afc2f809c424b0f337f56059d1dfcc7e6d98
+      path: bootloader/mcuboot
+      groups:
+        - bootloader
+    - name: mipi-sys-t
+      path: modules/debug/mipi-sys-t
+      groups:
+        - debug
+      revision: 71ace1f5caa03e56c8740a09863e685efb4b2360
+    - name: net-tools
+      revision: a1fb781b67c33e9a6868b0915b627315c5cac668
+      path: tools/net-tools
+      groups:
+        - tools
+    - name: nrf_hw_models
+      revision: 4b0b020e25dbf1a11ccccf7b7741d6ca991ba9e4
+      path: modules/bsim_hw_models/nrf_hw_models
+    - name: open-amp
+      revision: 76d2168bcdfcd23a9a7dce8c21f2083b90a1e60a
+      path: modules/lib/open-amp
+    - name: openthread
+      revision: e10a92570f94ff1e0bc5e0da9ecf0ee135d955a6
+      path: modules/lib/openthread
+    - name: percepio
+      path: modules/debug/percepio
+      revision: b68d17993109b9bee6b45dc8c9794e7b7bce236d
+      groups:
+        - debug
+    - name: picolibc
+      path: modules/lib/picolibc
+      revision: 764ef4e401a8f4c6a86ab723533841f072885a5b
+    - name: segger
+      revision: b011c45b585e097d95d9cf93edf4f2e01588d3cd
+      path: modules/debug/segger
+      groups:
+        - debug
+    - name: tinycrypt
+      revision: 1012a3ebee18c15ede5efc8332ee2fc37817670f
+      path: modules/crypto/tinycrypt
+      groups:
+        - crypto
+    - name: trusted-firmware-m
+      revision: a11cd27905aecc4416cfc85552bfc3b997375056
+      path: modules/tee/tf-m/trusted-firmware-m
+      groups:
+        - tee
+    - name: trusted-firmware-a
+      revision: 713ffbf96c5bcbdeab757423f10f73eb304eff07
+      path: modules/tee/tf-a/trusted-firmware-a
+      groups:
+        - tee
+
+  self:
+    path: zephyr
+    west-commands: scripts/west-commands.yml
+    import: submanifests
